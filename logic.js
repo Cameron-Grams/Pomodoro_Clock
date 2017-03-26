@@ -52,7 +52,9 @@ function session_count_down(){
 
 }
 
-
+function change_display(){
+  console.log("Display change");
+}
 
 
 
