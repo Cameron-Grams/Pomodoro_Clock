@@ -5,14 +5,14 @@ function increase_session(){
   var session_time = parseInt(document.getElementById("interval_time").value);
   session_time += 1;
   document.getElementById("interval_time").value = session_time;
-  display_time(session_time);
+  display_time(session_time, "00");
 }
 
 function decrease_session(){
   var session_time = parseInt(document.getElementById("interval_time").value);
   session_time -= 1;
   document.getElementById("interval_time").value = session_time;
-  display_time(session_time);
+  display_time(session_time, "00");
 }
 
 function increase_break(){
@@ -32,8 +32,6 @@ function stop_count_down(){
 }
 
 function session_count_down(){
-  var session_time = document.getElementById("interval_time").value;
-  var seconds = 60; 
   counting = setInterval(function(){
     curr_time = document.getElementById("current_time").value;
     var min_sec_split = curr_time.match(/:/);
@@ -41,18 +39,40 @@ function session_count_down(){
     var minutes = parseInt(curr_time.substring(min_sec_index, 0));
     var seconds = parseInt(curr_time.substring(min_sec_index + 1));
     console.log(minutes);
-//workout stop and minute to second logic...
+    console.log(seconds);
+
+    if (seconds == 0 && minutes == 0) {
+      console.log("in final test");
+//      clearInterval(counting);
+      minutes = document.getElementById("break_time").value;
+
+//      display_time(break_time, "00");
+    }
+    if (seconds == 0) {
+      seconds = 60;
+      minutes -= 1;
+    }
+
     seconds -= 1;
-    if (seconds <= -1) {
-      clearInterval(counting);
-    } else {
+
+    if (seconds < 10){
+      seconds.toString();
+      seconds = "0" + seconds;
+    }
+
+    if (seconds >= 0) {
       display_time(minutes, seconds);
     }
   }, 1000);
-
 }
 
-function change_display(){
+
+
+
+
+
+
+function change_display_type(){
   console.log("Display change");
 }
 

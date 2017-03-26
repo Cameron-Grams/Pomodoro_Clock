@@ -13,17 +13,17 @@
 <input id="session_number" readonly value="1"><br>
 
 <button class="adjust" id="interval_minus" onClick="decrease_session()">-</button>
-<input id="interval_time" readonly value="25">
+<input id="interval_time"  value="25">
 <button class="adjust" id="interval_plus" onClick="increase_session()">+</button>
 
 <button class="adjust" id="break_minus" onClick="decrease_break()">-</button>
 <input id="break_time" readonly value="5">
 <button class="adjust" id="break_plus" onClick="increase_break()" >+</button><br>
 
-<p onClick="change_display()">Display</p><br>
+<p onClick="change_display_type()">Display</p><br>
 
 
-<input id="current_time" readonly  value="25:00" ><br>
+<input id="current_time" readonly  value="x" ><br>
 <button id="start_count" onClick="session_count_down()">Start</button>
 <button id="start_count" onClick="stop_count_down()" >Stop</button>
 
