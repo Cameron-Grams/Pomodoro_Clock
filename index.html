@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Pomodoro</title>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container" id="timer_body"  >
+
+
+<input id="session_number" readonly value="1"><br>
+
+<button class="adjust" id="interval_minus" onClick="decrease_session()">-</button>
+<input id="interval_time" readonly value="25">
+<button class="adjust" id="interval_plus" onClick="increase_session()">+</button>
+
+<button class="adjust" id="break_minus" onClick="decrease_break()">-</button>
+<input id="break_time" readonly value="5">
+<button class="adjust" id="break_plus" onClick="increase_break()" >+</button><br>
+
+<input id="current_time" readonly  value="25" >
+<button id="start_count" onClick="session_count_down()">Start</button>
+<button id="start_count" onClick="stop_count_down()" >Stop</button>
+
+
+
+</div>
+<script src="logic.js"></script>
+<body>
+</html>
