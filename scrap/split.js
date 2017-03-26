@@ -7,4 +7,14 @@ function split(str){
   console.log(seconds);
 }
 
+var test_val = true;
+
+function switch_val(){
+  test_val = !test_val;
+  return test_val;
+}
+
 split("28:15");
+g = switch_val();
+
+console.log(g);

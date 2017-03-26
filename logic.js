@@ -1,5 +1,6 @@
-var clock_running = false;
+var in_break = false;
 var counting;
+var display_type;
 
 function increase_session(){
   var session_time = parseInt(document.getElementById("interval_time").value);
@@ -28,12 +29,16 @@ function decrease_break(){
 }
 
 function stop_count_down(){
-  clearInterval(counting);
+  window.clearInterval(counting);
 }
 
 function session_count_down(){
-  counting = setInterval(function(){
+  counting = window.setInterval(function(){
     curr_time = document.getElementById("current_time").value;
+
+
+
+
     var min_sec_split = curr_time.match(/:/);
     var min_sec_index = curr_time.indexOf(min_sec_split);
     var minutes = parseInt(curr_time.substring(min_sec_index, 0));
@@ -43,10 +48,7 @@ function session_count_down(){
 
     if (seconds == 0 && minutes == 0) {
       console.log("in final test");
-//      clearInterval(counting);
-      minutes = document.getElementById("break_time").value;
-
-//      display_time(break_time, "00");
+      main_control();
     }
     if (seconds == 0) {
       seconds = 60;
@@ -67,6 +69,29 @@ function session_count_down(){
 }
 
 
+//function to transition between session interval and break interval and back
+function main_control(){
+  var session = document.getElementById("session_number").value;
+  var current_time = document.getElementById("current_time").value;
+  var break_time = document.getElementById("break_time").value;
+  var session_time = document.getElementById("interval_time").value;
+
+
+  in_break = !in_break;
+  console.log(in_break);
+
+
+  if (in_break){
+    document.getElementById("session_number").value = parseInt(session) + 1;
+    document.getElementById("current_time").value = "05:00";
+    console.log("passed display time");
+  } else {
+
+    display_time(session_time, '00');
+  } 
+  
+  session_count_down();
+}
 
 
 
@@ -83,6 +108,7 @@ function display_time(minutes, seconds){
   var min = minutes.toString();
   var sec = seconds.toString();
   var curr_time = min + ":" + sec;
+  console.log("current time is ", curr_time);
   document.getElementById("current_time").value = curr_time;
 }
 
