@@ -28,11 +28,6 @@ function decrease_break(){
   document.getElementById("break_time").value = break_time;
 }
 
-function stop_count_down(){
-  counting.pause();;
-}
-
-
 
 function Current_Countdown(count_down){
   var timerObj;
@@ -61,12 +56,17 @@ function Current_Countdown(count_down){
     }
   }
 
+  this.reset = function(){
+    this.stop().start();
+  }
 }
 
-
+function pause_count_down(){
+  counting.pause();
+}
 
 //calls the actual countdown timer
-function session_count_down(){
+function current_count_down(){
   if (!counting){
     counting = new Current_Countdown(count_down);
     counting.start();
@@ -77,16 +77,13 @@ function session_count_down(){
 
 function count_down(){
     curr_time = document.getElementById("current_time").value;
-    var min_sec_split = curr_time.match(/:/);
-    var min_sec_index = curr_time.indexOf(min_sec_split);
-    var minutes = parseInt(curr_time.substring(min_sec_index, 0));
-    var seconds = parseInt(curr_time.substring(min_sec_index + 1));
-    console.log(minutes);
-    console.log(seconds);
+    var min_sec_split = curr_time.split(':');
+    var minutes = parseInt(min_sec_split[0]);
+    var seconds = parseInt(min_sec_split[1]);
 
     if (seconds == 0 && minutes == 0) {
-      console.log("in final test");
       main_control();
+      return;
     }
     if (seconds == 0) {
       seconds = 60;
@@ -105,12 +102,6 @@ function count_down(){
     }
 };
 
-
-
-
-
-
-
 //function to transition between session interval and break interval and back
 function main_control(){
   var session = document.getElementById("session_number").value;
@@ -118,32 +109,21 @@ function main_control(){
   var break_time = document.getElementById("break_time").value;
   var session_time = document.getElementById("interval_time").value;
 
-
   in_break = !in_break;
   console.log("in_break value: ", in_break);
 
+  counting.pause();
 
   if (in_break){
     console.log("passed display time");
     display_time(break_time, "00");
+    
   } else {
     document.getElementById("session_number").value = parseInt(session) + 1;
     display_time(session_time, '00');
   } 
-  
-  session_count_down();
+  counting.reset();
 }
-
-
-
-
-
-function change_display_type(){
-  console.log("Display change");
-}
-
-
-
 
 function display_time(minutes, seconds){
   var min = minutes.toString();
@@ -151,6 +131,13 @@ function display_time(minutes, seconds){
   var curr_time = min + ":" + sec;
   console.log("current time is ", curr_time);
   document.getElementById("current_time").value = curr_time;
+}
+
+
+
+
+function change_display_type(){
+  console.log("Display change");
 }
 
 
