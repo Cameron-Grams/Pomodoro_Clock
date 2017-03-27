@@ -29,13 +29,12 @@ function decrease_break(){
 }
 
 function stop_count_down(){
-  window.clearInterval(counting);
+  clearInterval(counting);
 }
 
-var that = this;
 //calls the actual countdown timer
 function session_count_down(){
-  counting = window.setInterval( that.count_down, 1000);
+  counting = setInterval( count_down, 1000);
 }
 
 //performs the function of counting down the display
