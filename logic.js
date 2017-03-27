@@ -1,31 +1,40 @@
+var $session = document.getElementById("session_number");
+var $current_time = document.getElementById("current_time");
+var $break_time = document.getElementById("break_time");
+var $session_time = document.getElementById("interval_time");
+
 var in_break = false;
 var counting;
-var display_type;
+
+
+
+//var disp = 0;
+//var display_type = full;
 
 function increase_session(){
-  var session_time = parseInt(document.getElementById("interval_time").value);
+  var session_time = parseInt($session_time.value);
   session_time += 1;
-  document.getElementById("interval_time").value = session_time;
+  $session_time.value = session_time;
   display_time(session_time, "00");
 }
 
 function decrease_session(){
-  var session_time = parseInt(document.getElementById("interval_time").value);
+  var session_time = parseInt($session_time.value);
   session_time -= 1;
-  document.getElementById("interval_time").value = session_time;
+  $session_time.value = session_time;
   display_time(session_time, "00");
 }
 
 function increase_break(){
-  var break_time = parseInt(document.getElementById("break_time").value);
+  var break_time = parseInt($break_time.value);
   break_time += 1;
-  document.getElementById("break_time").value = break_time;
+  $break_time.value = break_time;
 }
 
 function decrease_break(){
-  var break_time = parseInt(document.getElementById("break_time").value);
+  var break_time = parseInt($break_time.value);
   break_time -= 1;
-  document.getElementById("break_time").value = break_time;
+  $break_time.value = break_time;
 }
 
 
@@ -76,7 +85,7 @@ function current_count_down(){
 }
 
 function count_down(){
-    curr_time = document.getElementById("current_time").value;
+    curr_time = $current_time.value;
     var min_sec_split = curr_time.split(':');
     var minutes = parseInt(min_sec_split[0]);
     var seconds = parseInt(min_sec_split[1]);
@@ -104,11 +113,6 @@ function count_down(){
 
 //function to transition between session interval and break interval and back
 function main_control(){
-  var session = document.getElementById("session_number").value;
-  var current_time = document.getElementById("current_time").value;
-  var break_time = document.getElementById("break_time").value;
-  var session_time = document.getElementById("interval_time").value;
-
   in_break = !in_break;
   console.log("in_break value: ", in_break);
 
@@ -116,11 +120,11 @@ function main_control(){
 
   if (in_break){
     console.log("passed display time");
-    display_time(break_time, "00");
+    display_time($break_time.value, "00");
     
   } else {
-    document.getElementById("session_number").value = parseInt(session) + 1;
-    display_time(session_time, '00');
+    $session.value = parseInt($session.value) + 1;
+    display_time($session_time.value, '00');
   } 
   counting.reset();
 }
@@ -137,6 +141,10 @@ function display_time(minutes, seconds){
 
 
 function change_display_type(){
+  var displays = ['full', 'Minutes', '5 Min Warning'];
+  disp += 1;
+  var display_option = disp % 3;
+  display_type = displays[display_option];
   console.log("Display change");
 }
 
