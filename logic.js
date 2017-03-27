@@ -29,15 +29,52 @@ function decrease_break(){
 }
 
 function stop_count_down(){
-  clearInterval(counting);
+  counting.pause();;
 }
+
+
+
+function Current_Countdown(count_down){
+  var timerObj;
+
+  this.pause = function(){
+    if (timerObj){
+      clearInterval(timerObj);
+    }
+    return this;
+  }
+
+  this.stop = function(){
+    if (timerObj){
+      clearInterval(timerObj);
+      timerObj = null;
+    }
+    return this;
+  }
+ 
+  this.start = function() {
+    if (!timerObj){
+      this.stop();
+      timerObj = setInterval(count_down, 1000);
+    } else {
+      timerObj = setInterval(count_down, 1000);
+    }
+  }
+
+}
+
+
 
 //calls the actual countdown timer
 function session_count_down(){
-  counting = setInterval( count_down, 1000);
+  if (!counting){
+    counting = new Current_Countdown(count_down);
+    counting.start();
+  } else {
+    counting.start();
+  }
 }
 
-//performs the function of counting down the display
 function count_down(){
     curr_time = document.getElementById("current_time").value;
     var min_sec_split = curr_time.match(/:/);
