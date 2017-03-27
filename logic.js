@@ -32,13 +32,15 @@ function stop_count_down(){
   window.clearInterval(counting);
 }
 
+var that = this;
+//calls the actual countdown timer
 function session_count_down(){
-  counting = window.setInterval(function(){
+  counting = window.setInterval( that.count_down, 1000);
+}
+
+//performs the function of counting down the display
+function count_down(){
     curr_time = document.getElementById("current_time").value;
-
-
-
-
     var min_sec_split = curr_time.match(/:/);
     var min_sec_index = curr_time.indexOf(min_sec_split);
     var minutes = parseInt(curr_time.substring(min_sec_index, 0));
@@ -65,8 +67,12 @@ function session_count_down(){
     if (seconds >= 0) {
       display_time(minutes, seconds);
     }
-  }, 1000);
-}
+};
+
+
+
+
+
 
 
 //function to transition between session interval and break interval and back
@@ -78,15 +84,14 @@ function main_control(){
 
 
   in_break = !in_break;
-  console.log(in_break);
+  console.log("in_break value: ", in_break);
 
 
   if (in_break){
-    document.getElementById("session_number").value = parseInt(session) + 1;
-    document.getElementById("current_time").value = "05:00";
     console.log("passed display time");
+    display_time(break_time, "00");
   } else {
-
+    document.getElementById("session_number").value = parseInt(session) + 1;
     display_time(session_time, '00');
   } 
   
