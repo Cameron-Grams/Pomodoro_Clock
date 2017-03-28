@@ -9,7 +9,7 @@ body {
   border: 2px solid black;
   padding: 10px;
   text-align: center;
-  width: 25%;
+  width: 20%;
   color: #237a33;
   background-color: #102113;
   border-radius: 50px; 
@@ -51,7 +51,7 @@ p {
   border-radius: 5px;
   border: 1px solid transparent;
   text-align: center;
-  font-size: 50px;
+  font-size: 40px;
   background-color: #96a834;
 }
 
