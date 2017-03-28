@@ -9,24 +9,31 @@
 <body>
 <div class="container" id="timer_body"  >
 
+<p> Session number
+<input class="display_values" id="session_number" readonly value="1"><br>
+</p>
 
-<input id="session_number" readonly value="1"><br>
-
+<div>
+<p class="button_labels" >Session Length    <span>  </span>
 <button class="adjust" id="interval_minus" onClick="decrease_session()">-</button>
-<input id="interval_time"  value="25">
-<button class="adjust" id="interval_plus" onClick="increase_session()">+</button>
+<input class="display_values" id="interval_time"  value="25">
+<button class="adjust" id="interval_plus" onClick="increase_session()">+</button><br>
+</p>
 
+<p  class="button_labels">Break Length
 <button class="adjust" id="break_minus" onClick="decrease_break()">-</button>
-<input id="break_time" readonly value="5">
+<input class="display_values" id="break_time" readonly value="5">
 <button class="adjust" id="break_plus" onClick="increase_break()" >+</button><br>
+</p>
 
-<p onClick="change_display_type()">Display</p><br>
+<p onClick="change_display_type()">Display</p>
+</div>
 
-
-<input id="current_time" readonly  value="x" ><br>
-<button id="start_count" onClick="current_count_down()">Start</button>
-<button id="start_count" onClick="pause_count_down()" >Stop</button>
-
+<div>
+<input id="current_time" readonly  value="25:00" ><br>
+<button class="adjust" id="start_count" onClick="current_count_down()">Start</button>
+<button class="adjust" id="start_count" onClick="pause_count_down()" >Stop</button>
+</div>
 
 
 </div>
