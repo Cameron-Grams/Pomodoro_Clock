@@ -2,11 +2,28 @@
 <html>
 <head>
 <title>Pomodoro</title>
-
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato|News+Cycle" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<div class="container" id="intro_body">
+<h1>Pomodoro Timer</h1>
+<h3>Positioned to the right to sit behind other work</h3>
+<h3>"Display" cycles between display options:</h3>
+<p><i class="material-icons">chevron_right</i>Either show minutes and seconds</p>
+<p><i class="material-icons">chevron_right</i>  Show only minutes</p>
+<p><i class="material-icons">chevron_right</i>Or show coundown only when 5 minutes<br> remain in current session</p>
+
+
+
+</div>
+
+
+
+
 <div class="container" id="timer_body"  >
 <audio id="end_beep"></audio>
 <p> Session number
@@ -16,7 +33,7 @@
 <div>
 <p class="button_labels" >Session Length    <span>  </span>
 <button class="adjust" id="interval_minus" onClick="decrease_session()">-</button>
-<input class="display_values" id="interval_time"  value="25">
+<input class="display_values" id="interval_time" readonly value="25">
 <button class="adjust" id="interval_plus" onClick="increase_session()">+</button><br>
 </p>
 
@@ -34,6 +51,8 @@
 <input id="current_time" readonly  value="25:00" ><br>
 <button class="adjust" id="start_count" onClick="current_count_down()">Start</button>
 <button class="adjust" id="start_count" onClick="pause_count_down()" >Stop</button>
+<button class="adjust" id="start_count" onClick="reset_all()" >Reset</button>
+
 </div>
 
 

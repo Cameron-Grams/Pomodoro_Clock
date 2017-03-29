@@ -11,7 +11,6 @@ var state_bg = true;
 var in_break = false;
 var counting;
 
-
 var curr_time = $current_time.value;
 var disp = 0;
 var display_type = "full";
@@ -19,15 +18,7 @@ var min_sec_split = curr_time.split(':');
 var minutes = parseInt(min_sec_split[0]);
 var seconds = parseInt(min_sec_split[1]);
 
-
-
-
-
-
-
-
-
-
+//functions to control the initial time of the session and break
 function increase_session(){
   var session_time = parseInt($session_time.value);
   session_time += 1;
@@ -69,7 +60,6 @@ function alarm_display(){
   state_bg = !state_bg;
 }
 
-
 //control for two alarm functions
 function end_alarm(){
   for (var i = 1; i <= 3000; i += 1000){
@@ -77,15 +67,15 @@ function end_alarm(){
     setTimeout(alarm_sound, i);
     setTimeout(alarm_display, i + 500);
   }
-  setTimeout(return_display, 3200);
+  setTimeout(return_display, 3100);
 }
 
+//return the color of the display
 function return_display(){
-  document.getElementById("current_time").style.backgroundColor = "#96a834";
+  $current_time.style.backgroundColor = "#96a834";
 }
 
-
-
+//timer object 
 function Current_Countdown(count_down){
   var timerObj;
 
@@ -118,8 +108,20 @@ function Current_Countdown(count_down){
   }
 }
 
+//pause current count down
 function pause_count_down(){
   counting.pause();
+}
+
+//reset to initial countdown selection
+function reset_all(){
+  counting.pause();
+  if (in_break){
+    display_time($break_time.value, "00");
+  } else {
+    $session.value = parseInt($session.value) + 1;
+    display_time($session_time.value, '00');
+  } 
 }
 
 //calls the actual countdown timer
@@ -132,8 +134,8 @@ function current_count_down(){
   }
 }
 
+//perform the calculations of the countdown
 function count_down(){
-//    curr_time = $current_time.value;
     var min_sec_split = curr_time.split(':');
     minutes = parseInt(min_sec_split[0]);
     seconds = parseInt(min_sec_split[1]);
@@ -163,16 +165,9 @@ function count_down(){
 //function to transition between session interval and break interval and back
 function main_control(){
   in_break = !in_break;
-  console.log("in_break value: ", in_break);
-
-
-
   counting.pause();
-
   if (in_break){
-    console.log("passed display time");
     display_time($break_time.value, "00");
-    
   } else {
     $session.value = parseInt($session.value) + 1;
     display_time($session_time.value, '00');
@@ -180,31 +175,26 @@ function main_control(){
   counting.reset();
 }
 
+//display time values with selected restrictions
 function display_time(minutes, seconds){
   var min = minutes.toString();
   var sec = seconds.toString();
   curr_time = min + ":" + sec;
-  console.log("current time is ", curr_time);
-  console.log("minutes are ", min);
   if (display_type === "full"){
-    document.getElementById("current_time").value = curr_time;
+    $current_time.value = curr_time;
   } else if (display_type === 'Minutes') {
-    document.getElementById("current_time").value = min;
+    $current_time.value = min;
   } else if (display_type === '5 Min Warning'){
-   
-    if (minutes <= 5){
-      document.getElementById("current_time").value = curr_time;
+    if (minutes <= 4){
+      $current_time.value = curr_time;
     }
     else {
-      document.getElementById("current_time").value = ' ';
+      $current_time.value = ' ';
     }
-
   }
 }
 
-
-
-
+//select what type of display to show
 function change_display_type(){
   var displays = ['full', 'Minutes', '5 Min Warning'];
   disp += 1;
@@ -213,14 +203,6 @@ function change_display_type(){
   display_time(minutes, seconds)
   console.log("Display change to " + display_type);
 }
-
-
-
-
-
-
-
-
 
 
 
