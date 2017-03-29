@@ -15,6 +15,11 @@ var counting;
 var curr_time = $current_time.value;
 var disp = 0;
 var display_type = "full";
+var min_sec_split = curr_time.split(':');
+var minutes = parseInt(min_sec_split[0]);
+var seconds = parseInt(min_sec_split[1]);
+
+
 
 
 
@@ -130,8 +135,8 @@ function current_count_down(){
 function count_down(){
 //    curr_time = $current_time.value;
     var min_sec_split = curr_time.split(':');
-    var minutes = parseInt(min_sec_split[0]);
-    var seconds = parseInt(min_sec_split[1]);
+    minutes = parseInt(min_sec_split[0]);
+    seconds = parseInt(min_sec_split[1]);
 
     if (seconds == 0 && minutes == 0) {
       end_alarm();
@@ -180,17 +185,20 @@ function display_time(minutes, seconds){
   var sec = seconds.toString();
   curr_time = min + ":" + sec;
   console.log("current time is ", curr_time);
-
+  console.log("minutes are ", min);
   if (display_type === "full"){
     document.getElementById("current_time").value = curr_time;
   } else if (display_type === 'Minutes') {
     document.getElementById("current_time").value = min;
   } else if (display_type === '5 Min Warning'){
-    if (min <= '5'){
-     document.getElementById("current_time").value = curr_time;
-    } else {
+   
+    if (minutes <= 5){
+      document.getElementById("current_time").value = curr_time;
+    }
+    else {
       document.getElementById("current_time").value = ' ';
     }
+
   }
 }
 
@@ -202,7 +210,8 @@ function change_display_type(){
   disp += 1;
   var display_option = disp % 3;
   display_type = displays[display_option];
-  console.log("Display change");
+  display_time(minutes, seconds)
+  console.log("Display change to " + display_type);
 }
 
 
