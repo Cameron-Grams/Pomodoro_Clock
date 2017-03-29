@@ -12,9 +12,16 @@ var in_break = false;
 var counting;
 
 
+var curr_time = $current_time.value;
+var disp = 0;
+var display_type = "full";
 
-//var disp = 0;
-//var display_type = full;
+
+
+
+
+
+
 
 function increase_session(){
   var session_time = parseInt($session_time.value);
@@ -50,9 +57,9 @@ function alarm_sound(){
 //change display for the alarm
 function alarm_display(){
   if (state_bg){
-    document.getElementById("current_time").style.backgroundColor = "white";
+    $current_time.style.backgroundColor = "white";
   } else {
-    document.getElementById("current_time").style.backgroundColor = "red";
+    $current_time.style.backgroundColor = "red";
   }
   state_bg = !state_bg;
 }
@@ -65,8 +72,7 @@ function end_alarm(){
     setTimeout(alarm_sound, i);
     setTimeout(alarm_display, i + 500);
   }
-  setTimeout(return_display, 4000);
-  console.log("at end end alarm");
+  setTimeout(return_display, 3200);
 }
 
 function return_display(){
@@ -122,7 +128,7 @@ function current_count_down(){
 }
 
 function count_down(){
-    curr_time = $current_time.value;
+//    curr_time = $current_time.value;
     var min_sec_split = curr_time.split(':');
     var minutes = parseInt(min_sec_split[0]);
     var seconds = parseInt(min_sec_split[1]);
@@ -172,9 +178,20 @@ function main_control(){
 function display_time(minutes, seconds){
   var min = minutes.toString();
   var sec = seconds.toString();
-  var curr_time = min + ":" + sec;
+  curr_time = min + ":" + sec;
   console.log("current time is ", curr_time);
-  document.getElementById("current_time").value = curr_time;
+
+  if (display_type === "full"){
+    document.getElementById("current_time").value = curr_time;
+  } else if (display_type === 'Minutes') {
+    document.getElementById("current_time").value = min;
+  } else if (display_type === '5 Min Warning'){
+    if (min <= '5'){
+     document.getElementById("current_time").value = curr_time;
+    } else {
+      document.getElementById("current_time").value = ' ';
+    }
+  }
 }
 
 
