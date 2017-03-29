@@ -3,6 +3,11 @@ var $current_time = document.getElementById("current_time");
 var $break_time = document.getElementById("break_time");
 var $session_time = document.getElementById("interval_time");
 
+var $sound = document.getElementById("end_beep");
+$sound.src = " http://soundbible.com/grab.php?id=1806&type=mp3";
+$sound.load();
+
+var state_bg = true;
 var in_break = false;
 var counting;
 
@@ -36,6 +41,38 @@ function decrease_break(){
   break_time -= 1;
   $break_time.value = break_time;
 }
+
+//sound for the alaram
+function alarm_sound(){
+  $sound.play(); 
+}
+
+//change display for the alarm
+function alarm_display(){
+  if (state_bg){
+    document.getElementById("current_time").style.backgroundColor = "white";
+  } else {
+    document.getElementById("current_time").style.backgroundColor = "red";
+  }
+  state_bg = !state_bg;
+}
+
+
+//control for two alarm functions
+function end_alarm(){
+  for (var i = 1; i <= 3000; i += 1000){
+    setTimeout(alarm_display, i);
+    setTimeout(alarm_sound, i);
+    setTimeout(alarm_display, i + 500);
+  }
+  setTimeout(return_display, 4000);
+  console.log("at end end alarm");
+}
+
+function return_display(){
+  document.getElementById("current_time").style.backgroundColor = "#96a834";
+}
+
 
 
 function Current_Countdown(count_down){
@@ -91,6 +128,7 @@ function count_down(){
     var seconds = parseInt(min_sec_split[1]);
 
     if (seconds == 0 && minutes == 0) {
+      end_alarm();
       main_control();
       return;
     }
@@ -115,6 +153,8 @@ function count_down(){
 function main_control(){
   in_break = !in_break;
   console.log("in_break value: ", in_break);
+
+
 
   counting.pause();
 
