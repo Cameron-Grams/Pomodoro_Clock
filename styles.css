@@ -19,6 +19,7 @@ body {
   padding: 10px;
   text-align: center;
   width: 25%;
+  min-width: 250px;
   color: #237a33;
   background-color: #102113;
   border-radius: 50px; 
