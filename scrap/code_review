@@ -1,9 +1,0 @@
-I would appreciate feedback on this Pomodoro Clock.  I tried to use straight 
-Javascript for the logic instead of JQuery and I would be interested in any observations of
-where that was a good or bad decision, my motivation was to learn Javascript more thoroughly
-before using the JQuery library.
-
-Additionally I employed a timer object to try and control the scope issues I had with the timer
-functions. Was that a good idea? Are there better options? 
-
-Any insights, suggestions or observations are welcome.  Thank you for your time. 
