@@ -14,7 +14,7 @@ body {
 #timer_body {
   position: absolute;
   right: 20px;
-  top: 20px;
+  bottom: 20px;
   border: 2px solid black;
   padding: 10px;
   text-align: center;
